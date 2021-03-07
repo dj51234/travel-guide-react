@@ -1,10 +1,13 @@
+import React, { useState, useEffect } from "react";
+
 import { CssBaseline, Grid } from "@material-ui/core";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
+import { getPlacesData, getWeatherData } from "./api/travelAdvisorAPI";
 
 function App() {
-  const [type, setType] = useState("restaurants");
+  const [category, setCategory] = useState("restaurants");
   const [rating, setRating] = useState("");
 
   const [coords, setCoords] = useState({});
@@ -40,14 +43,14 @@ function App() {
         setWeatherData(data)
       );
 
-      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+      getPlacesData(category, bounds.sw, bounds.ne).then((data) => {
         setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
         setFilteredPlaces([]);
         setRating("");
         setIsLoading(false);
       });
     }
-  }, [bounds, type]);
+  }, [bounds, category]);
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -68,8 +71,8 @@ function App() {
             isLoading={isLoading}
             childClicked={childClicked}
             places={filteredPlaces.length ? filteredPlaces : places}
-            type={type}
-            setType={setType}
+            category={category}
+            setCategory={setCategory}
             rating={rating}
             setRating={setRating}
           />

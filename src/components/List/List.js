@@ -14,8 +14,8 @@ import useStyles from "./styles.js";
 
 const List = ({
   places,
-  type,
-  setType,
+  category,
+  setCategory,
   rating,
   setRating,
   childClicked,
@@ -42,11 +42,11 @@ const List = ({
       ) : (
         <>
           <FormControl className={classes.formControl}>
-            <InputLabel id="type">Type</InputLabel>
+            <InputLabel id="category">category</InputLabel>
             <Select
-              id="type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
             >
               <MenuItem value="restaurants">Restaurants</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
